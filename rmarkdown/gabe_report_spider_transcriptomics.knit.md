@@ -109,18 +109,22 @@ As a complementary analysis, we have run Trinotate against a custom database wit
 
    The difference in sequences is evidenced in Table \@ref(tab:mrna)
 
-   ```{r mrna, echo=FALSE}
-   mrna_latrod <- data.frame("Raw"=14067, "Cleaned"=14013)
-   knitr::kable(mrna_latrod,
-             caption = "Number of sequences before and after cleanup")
-   ```
+   
+   Table: (\#tab:mrna)Number of sequences before and after cleanup
+   
+      Raw   Cleaned
+   ------  --------
+    14067     14013
    
    You can see *Latrodectus curacaviensis* morphology in Figure \@ref(fig:cura)
    
    
-   ```{r cura, fig.cap = "\\textit{L. curacaviensis} morphology", out.width = "100%"}
+   
+   ```r
    knitr::include_graphics("cura.jpg")
    ```
+   
+   ![(\#fig:cura)\textit{L. curacaviensis} morphology](cura.jpg){width=100%}
 -->
 
 

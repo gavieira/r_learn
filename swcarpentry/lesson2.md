@@ -123,6 +123,6 @@ edges(c("Don't", "repeat", "yourself", "or", "others"))
 ```
 ## [1] "Don't"  "others"
 ```
----
+<!--
 #Continue at **Named Variables and the Scope of Variables** #http://swcarpentry.github.io/r-novice-inflammation/02-func-R/index.html
----
+--

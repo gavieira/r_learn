@@ -1,20 +1,23 @@
 ---
-title: Menu
+title: Menu Semanal
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+author: Agatinho & Gabezinho
 ---
 
-Dia da semana  |  Menu 
----  |  ---
-Sexta  |  -  teste \
--  teste2
-Sábado  | - opção 1 \
-- opção 2
-Domingo  | - opção 1 \
-- opção 2
-Segunda  | - opção 1 \
-- opção 2
-Terça  | - opção 1 \
-- opção 2
-Quarta  | - opção 1 \
-- opção 2
-Quinta  | - opção 1 \
-- opção 2
+**Dia da semana**  |  **Menu**
+:-: |  :--
+Sexta  |  -  2 beterrabas raladas \
+-  Batatas na gaveta \
+-  2 folhas de couve 
+Sábado  | - 2 beterrabas raladas \
+-  peixe \
+-  vinagrete de pepino (1 pepino, 1 tomate, 1 cebola e 1 pimentão)
+Domingo  | - moqueca de peixe (1 cebola, 1 tomate , 1 pimentão e coentro) \
+- Purê de batata (5 batatas grandes) 
+Segunda  | -  salada de grão de bico (1 cebola, 1 tomate, 1 pimentão e 2 folhas de couve)
+Terça  | - 2 folhas de couve (adicionar à salada de grão de bico)
+Quarta  | - Rúcula \
+- 1 berinjela assada \
+- Salada de alface (alface, 1 tomate, 1 cebola, 1 pimentão e 1 cenoura ralada) 
+Quinta  | - 1 berinjela assada \
+- Salada de alface (alface, 1 tomate, 1 cebola, 1 pimentão e 1 cenoura ralada) 

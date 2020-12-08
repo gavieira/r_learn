@@ -1,0 +1,20 @@
+---
+title: Menu
+---
+
+Dia da semana  |  Menu 
+---  |  ---
+Sexta  |  -  teste \
+-  teste2
+Sábado  | - opção 1 \
+- opção 2
+Domingo  | - opção 1 \
+- opção 2
+Segunda  | - opção 1 \
+- opção 2
+Terça  | - opção 1 \
+- opção 2
+Quarta  | - opção 1 \
+- opção 2
+Quinta  | - opção 1 \
+- opção 2

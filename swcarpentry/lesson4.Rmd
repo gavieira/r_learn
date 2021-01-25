@@ -1,0 +1,111 @@
+---
+title: "lesson4"
+author: "Gabriel Alves Vieira"
+date: "1/24/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Lesson 4 - Making Choices
+
+## Overview 
+
+**Questions**
+
+- How do I make choices using if and else statements?
+
+- How do I compare values?
+
+- How do I save my plots to a PDF file?
+
+**Objectives**
+
+- Save plot(s) in a PDF file.
+
+- Write conditional statements with if and else.
+
+- Correctly evaluate expressions containing && (‘and’) and || (‘or’).
+
+
+## Saving plots to a file
+
+
+Setting previously written functions:
+
+```{r}
+analyze <- function(filename) {
+  # Plots the average, min, and max inflammation over time.
+  # Input is character string of a csv file.
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  plot(avg_day_inflammation)
+  max_day_inflammation <- apply(dat, 2, max)
+  plot(max_day_inflammation)
+  min_day_inflammation <- apply(dat, 2, min)
+  plot(min_day_inflammation)
+}
+
+analyze_all <- function(folder = "data", pattern) {
+  # Runs the function analyze for each file in the given folder
+  # that contains the given pattern.
+  filenames <- list.files(path = folder, pattern = pattern, full.names = TRUE)
+  for (f in filenames) {
+    analyze(f)
+  }
+}
+```
+
+
+**Challenge**
+
+We can update the analyze function so that it always saves the plots in a pdf. But that would make it more difficult to interactively test out new changes. It would be ideal if analyze would either save or not save the plots based on its input.
+
+```{r}
+analyze <- function(filename, out_pdf = F) {
+  # Plots the average, min, and max inflammation over time.
+  # Input is character string of a csv file.
+  dat <- read.csv(file = filename, header = FALSE)
+  avg_day_inflammation <- apply(dat, 2, mean)
+  max_day_inflammation <- apply(dat, 2, max)
+  min_day_inflammation <- apply(dat, 2, min)
+  if (out_pdf) {
+    pdf_path <- paste("./plots/",tools::file_path_sans_ext(basename(filename)), ".pdf", sep = "") #generates filepath for that specific pdf file based on basename of original file without extension
+    pdf(pdf_path) # redirects plots to pdf file 
+    plot(min_day_inflammation)
+    plot(avg_day_inflammation)
+    plot(max_day_inflammation)
+    dev.off() # stop R from redirecting plots to pdf file
+  }
+  else {
+    plot(min_day_inflammation)
+    plot(avg_day_inflammation)
+    plot(max_day_inflammation)
+  }
+}
+
+analyze_all <- function(folder = "data", pattern, out_pdf = F) {
+  # Runs the function analyze for each file in the given folder
+  # that contains the given pattern.
+  filenames <- list.files(path = folder, pattern = pattern, full.names = TRUE)
+  for (f in filenames) {
+    if (out_pdf) {
+     analyze(f, out_pdf = T) 
+    }
+    else {
+      analyze(f)
+    }
+  }
+}
+
+analyze_all(pattern = "inflammation", out_pdf = T)
+```
+
+**Overwriting plots**
+
+If you run `pdf` multiple times without running `dev.off`, you will save plots to the most recently opened file. However, you won’t be able to open the previous pdf files because the connections were not closed. In order to get out of this situation, you’ll need to run `dev.off` until all the pdf connections are closed. You can check your current status using the function `dev.cur`. If it says “pdf”, all your plots are being saved in the last pdf specified. If it says “null device” or “RStudioGD”, the plots will be visualized normally.
+
+## Conditionals
+

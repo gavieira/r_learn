@@ -1,0 +1,182 @@
+---
+title: "Lesson 3 - Analyzing multiple datasets"
+author: "Gabriel Alves Vieira"
+date: "1/24/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Lesson 3
+
+## Overview
+
+**Questions**
+
+- How can I do the same thing to multiple data sets?
+
+- How do I write a `for` loop?
+
+**Objectives**
+
+- Explain what a `for` loop does.
+
+- Correctly write `for` loops to repeat simple calculations.
+
+- Trace changes to a loop variable as the loop runs.
+
+- Trace changes to other variables as they are updated by a `for` loop.
+
+- Use a function to get a list of filenames that match a simple pattern.
+
+- Use a `for` loop to process multiple files.
+
+-------------------------------------------------
+
+## For Loops 
+
+**Printing Numbers**
+
+R has a built-in function called `seq` that creates a list of numbers:
+
+```{r}
+seq(3)
+```
+
+Using seq, write a function that prints the first N natural numbers, one per line:
+
+```
+print_N(3)
+[1] 1
+[1] 2
+[1] 3
+```
+
+**Answer:**
+
+```{r}
+print_N <- function(numbers) {
+  for (num in seq(numbers)) {
+    print(num)
+  }
+}
+
+print_N(4)
+```
+
+---------
+
+**Summing values**
+
+Write a function called `total` that calculates the sum of the values in a vector. (R has a built-in function called `sum` that does this for you. Please don’t use it for this exercise.)
+
+```
+ex_vec <- c(4, 8, 15, 16, 23, 42)
+total(ex_vec)
+
+[1] 108
+```
+
+**Answer:**
+
+```{r}
+total <- function(vec) {
+  sum <- 0
+  for (element in vec) {
+   sum <- sum + element
+  }
+  return (sum)
+}
+
+total(c(4, 8, 15, 16, 23, 42))
+```
+
+------
+
+**Exponentiation**
+
+Exponentiation is built into R:
+
+```
+2^4
+[1] 16
+```
+
+Write a function called `expo` that uses a loop to calculate the same result.
+
+```
+expo(2, 4)
+[1] 16
+```
+
+**Answer:**
+```{r}
+expo <- function(num, exp) {
+  result <- 1
+  for (i in 1:exp) {
+   result <- result * num
+  }
+  return (result)
+}
+
+expo(2, 4)
+expo(5, 2)
+expo(2, 5)
+```
+
+## Processing multiple files
+
+**Organizing Larger Projects**
+
+For larger projects, it is recommended to organize separate parts of the analysis into multiple subdirectories, e.g. one subdirectory for the raw data, one for the code, and one for the results like figures. We have done that here to some extent, putting all of our data files into the subdirectory “data”. For more advice on this topic, you can read [A quick guide to organizing computational biology projects](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424) by William Stafford Noble.
+
+**Using loops to analyze multiple files**
+
+Write a function called `analyze_all` that takes a folder path and a filename pattern as its arguments and runs `analyze` (function created in the previous lesson) for each file whose name matches the pattern.
+
+**Answer:**
+
+First, we need to load the `analyze` function created in the previous lesson:
+
+```{r}
+analyze = function (filename) {
+  data = read.csv(filename, header = FALSE)
+  avg_data = apply(data, 2, mean)
+  max_data = apply(data, 2, max)
+  min_data = apply(data, 2, min)
+  plot(avg_data)
+  plot(max_data)
+  plot(min_data)
+}
+```
+
+Now, we can proceed to creating `analyze_all`:
+
+```{r}
+analyze_all <- function(pattern, path = ".") {
+  filenames <- list.files(path, pattern, full.names = T)
+  for (file in filenames) {
+    analyze(file)
+  }
+}
+
+analyze_all("inflammation", path = "./data/")
+
+#Trying with default path option (current workdir) 
+#setwd("./data/")
+#analyze_all("inflammation")
+#setwd("..")
+```
+
+
+## Key Points
+
+- Use `for (variable in collection)` to process the elements of a collection one at a time.
+
+- The body of a `for` loop is surrounded by curly braces (`{}`).
+
+- Use `length(thing)` to determine the length of something that contains other values.
+
+- Use `list.files(path = "path", pattern = "pattern", full.names = TRUE)` to create a list of files whose names match a pattern.

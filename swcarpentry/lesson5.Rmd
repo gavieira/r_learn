@@ -1,0 +1,93 @@
+---
+title: "Lesson 5"
+author: "Gabriel Alves Vieira"
+date: "2/4/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Lesson 5: Command-Line Programs
+
+## Overview
+
+**Questions**
+
+- How do I write a command-line script?
+ 
+- How do I read in arguments from the command-line?
+
+**Objectives**
+
+- Use the values of command-line arguments in a program.
+ 
+- Handle flags and files separately in a command-line program.
+ 
+- Read data from standard input in a program so that it can be used in a pipeline.
+
+**OBS:  All scripts are in the directory "lesson5_scripts".**
+
+## Command Line Arguments 
+
+
+**A Simple Command-Line Program**
+
+Write a command-line program that does addition and subtraction of two numbers.
+
+Hint: Everything argument read from the command-line is interpreted as a character string. You can convert from a string to a number using the function `as.numeric`.
+
+`Rscript arith.R 1 + 2`
+
+
+**Finding pattern**
+
+Using the function `list.files` introduced in a previous lesson, write a command-line program called `find-pattern.R` that lists all the files in the current directory that contain a specific pattern:
+
+```
+# For example, searching for the pattern "print_args" returns the two scripts we wrote earlier
+Rscript find-pattern.R print_args
+```
+
+## Handling Multiple Files
+
+
+**A Command Line Program with Arguments**
+
+Write a program called `check.R` that takes the names of one or more inflammation data files as arguments and checks that all the files have the same number of rows and columns. What is the best way to test your program?
+
+
+## Handling Command-Line Flags
+
+**Parsing Command-Line Flags**
+
+R has a package named `argparse` that helps handle complex command-line flags (it utilizes a Python module of the same name). We will not cover this package in this lesson but when you start writing programs with multiple parameters you’ll want to read through the package’s vignette. 
+
+**Shorter Command Line Arguments**
+
+Rewrite this program so that it uses `-n, -m, and -x` instead of `--min, --mean, and --max` respectively in a file called `readings_shorter.R`. Is the code easier to read? Is the program easier to understand?
+
+Separately, modify the program so that if no action is specified (or an incorrect action is given), it prints a message explaining how it should be used. **R: The program is neither easier to read nor easier to understand due to the ambiguity of the argument names.**
+
+
+## Handling Standard Input
+
+**Implementing wc in R**
+
+Write a program called `line-count.R` that works like the Unix `wc` command:
+
+If no filenames are given, it reports the number of lines in standard input.
+
+If one or more filenames are given, it reports the number of lines in each, followed by the total number of lines.
+
+
+## Key Points
+
+- Use commandArgs(trailingOnly = TRUE) to obtain a vector of the command-line arguments that a program was run with.
+ 
+- Avoid silent failures.
+ 
+- Use file("stdin") to connect to a program’s standard input.
+ 
+- Use cat(vec, sep = " ") to write the elements of vec to standard output, one per line.

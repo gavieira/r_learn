@@ -7,15 +7,15 @@ header-includes:
    - \newcommand{\codebox}[1] {
      \colorbox{gray!10}{\texttt{#1}}}
 output:
-   #html_document: default
-   bookdown::word_document2:  
-      #highlight: espresso
-      #reference_docx: template_justif_indent.docx
    bookdown::pdf_document2:
      #fig_caption: yes
      #latex_engine: xelatex
      toc: true
      toc_depth: 2
+   bookdown::word_document2:  
+      #highlight: espresso
+      #reference_docx: template_justif_indent.docx
+   #html_document: default
 lof: true
 lot: true
 indent: true
@@ -23,11 +23,6 @@ fontsize: 12pt
 urlcolor: blue
 citecolor: blue
 #geometry:
-#- top=2cm
-#- left=2cm
-#- right=2cm
-#- bottom=2cm
-#- heightrounded
 link-citations: yes
 csl: biomed-central.csl
 bibliography: library.bib
